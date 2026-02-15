@@ -459,12 +459,12 @@ function processChartData(data) {
 function getSampleData() {
     // Sample data for demonstration
     return {
-        totalResponden: 45,
+        totalResponden: 1,
         dimensions: {
-            adaptation: { ya: 185, tidak: 40 },
-            goal: { ya: 175, tidak: 50 },
-            integration: { ya: 195, tidak: 30 },
-            latency: { ya: 188, tidak: 37 }
+            adaptation: { ya: 3, tidak: 2 },
+            goal: { ya: 4, tidak: 1 },
+            integration: { ya: 2, tidak: 3 },
+            latency: { ya: 4, tidak: 1 }
         }
     };
 }
