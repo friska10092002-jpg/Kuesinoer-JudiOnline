@@ -431,18 +431,6 @@ async function initializeCharts() {
     }
 }
 
-function getSampleData() {
-    return {
-        totalResponden: 45,
-        dimensions: {
-            adaptation: { ya: 185, tidak: 40 },
-            goal: { ya: 175, tidak: 50 },
-            integration: { ya: 195, tidak: 30 },
-            latency: { ya: 188, tidak: 37 }
-        }
-    };
-}
-
 // ========================================
 // REFRESH BUTTON
 // ========================================
