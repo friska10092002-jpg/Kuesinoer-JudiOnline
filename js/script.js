@@ -456,19 +456,6 @@ function processChartData(data) {
     };
 }
 
-function getSampleData() {
-    // Sample data for demonstration
-    return {
-        totalResponden: 1,
-        dimensions: {
-            adaptation: { ya: 3, tidak: 2 },
-            goal: { ya: 4, tidak: 1 },
-            integration: { ya: 2, tidak: 3 },
-            latency: { ya: 4, tidak: 1 }
-        }
-    };
-}
-
 // ========================================
 // INITIALIZATION
 // ========================================
