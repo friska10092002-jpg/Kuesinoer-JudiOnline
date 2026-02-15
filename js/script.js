@@ -8,7 +8,7 @@
 // ========================================
 // GANTI URL INI DENGAN URL GOOGLE APPS SCRIPT ANDA
 // Lihat README.md untuk panduan setup
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz5rhwazfJ8Icpkk97v5736oxp0P6XVEcheEbozkTwxwqyRjorumjmtR-3QYSPEFXxVKQ/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcZqb6s1mv5gv1YNbjSsSaDiqYvbxai-a3FqjsKVQSHxS1TElswa9RrElERlQ00e4W8g/exec';
 
 // ========================================
 // UTILITY FUNCTIONS
@@ -366,23 +366,51 @@ function getLocalStorageData() {
 // ========================================
 
 async function fetchChartData() {
-    // Try to fetch from Google Sheets first
     try {
-        // Since Google Apps Script with no-cors doesn't return data,
-        // we'll use localStorage as fallback for demo
-        const localData = getLocalStorageData();
-        
-        if (localData.length > 0) {
-            return processChartData(localData);
+        const response = await fetch(GOOGLE_SCRIPT_URL);
+        const sheetData = await response.json();
+
+        // Jika sheet kosong (hanya header)
+        if (!sheetData || sheetData.length <= 1) {
+            return {
+                totalResponden: 0,
+                dimensions: {
+                    adaptation: { ya: 0, tidak: 0 },
+                    goal: { ya: 0, tidak: 0 },
+                    integration: { ya: 0, tidak: 0 },
+                    latency: { ya: 0, tidak: 0 }
+                }
+            };
         }
-        
-        // Return sample data if no data available
-        return getSampleData();
+
+        const headers = sheetData[0];
+        const rows = sheetData.slice(1);
+
+        const data = rows.map(row => {
+            let obj = {};
+            headers.forEach((header, index) => {
+                obj[header] = row[index];
+            });
+            return obj;
+        });
+
+        return processChartData(data);
+
     } catch (error) {
-        console.error('Error fetching chart data:', error);
-        return getSampleData();
+        console.error('Error ambil data:', error);
+
+        return {
+            totalResponden: 0,
+            dimensions: {
+                adaptation: { ya: 0, tidak: 0 },
+                goal: { ya: 0, tidak: 0 },
+                integration: { ya: 0, tidak: 0 },
+                latency: { ya: 0, tidak: 0 }
+            }
+        };
     }
 }
+
 
 function processChartData(data) {
     const totalResponden = data.length;
