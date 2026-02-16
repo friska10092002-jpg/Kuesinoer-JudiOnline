@@ -8,7 +8,7 @@
 // ========================================
 // GANTI URL INI DENGAN URL GOOGLE APPS SCRIPT ANDA
 // Lihat README.md untuk panduan setup
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcZqb6s1mv5gv1YNbjSsSaDiqYvbxai-a3FqjsKVQSHxS1TElswa9RrElERlQ00e4W8g/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLQO0IOoHLjwCCNpWwleorHMWfF19eaGpbtaOM5N3MbNEvOMLUA4TxY2E9tF5DR05dhw/exec';
 
 // ========================================
 // UTILITY FUNCTIONS
