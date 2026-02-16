@@ -386,43 +386,49 @@ function animateNumber(element, start, end, duration, suffix = '') {
 
 async function initializeCharts() {
     showLoading('Memuat data grafik...');
-    
+
     try {
-        // Fetch data
-        const data = await (window.KuesionerApp?.fetchChartData?.() || getSampleData());
-        
-        // Update stats
+        const data = await window.KuesionerApp.fetchChartData();
+
         updateStats(data);
-        
-        // Create charts
+
         createMainChart(data);
-        
+
         adaptationChart = createDimensionChart(
-            'adaptationChart', 
-            data.dimensions.adaptation, 
+            'adaptationChart',
+            data.dimensions.adaptation,
             CHART_COLORS.adaptation
         );
-        
+
         goalChart = createDimensionChart(
-            'goalChart', 
-            data.dimensions.goal, 
+            'goalChart',
+            data.dimensions.goal,
             CHART_COLORS.goal
         );
-        
+
         integrationChart = createDimensionChart(
-            'integrationChart', 
-            data.dimensions.integration, 
+            'integrationChart',
+            data.dimensions.integration,
             CHART_COLORS.integration
         );
-        
+
         latencyChart = createDimensionChart(
-            'latencyChart', 
-            data.dimensions.latency, 
+            'latencyChart',
+            data.dimensions.latency,
             CHART_COLORS.latency
         );
-        
+
         createSummaryChart(data);
-        
+
+        // AUTO REFRESH tiap 5 detik
+        setInterval(async () => {
+            const newData = await window.KuesionerApp.fetchChartData();
+
+            updateStats(newData);
+            createMainChart(newData);
+            createSummaryChart(newData);
+        }, 5000);
+
     } catch (error) {
         console.error('Error initializing charts:', error);
         showToast('Gagal memuat data grafik', 'error');
@@ -430,6 +436,7 @@ async function initializeCharts() {
         hideLoading();
     }
 }
+
 
 // ========================================
 // REFRESH BUTTON
