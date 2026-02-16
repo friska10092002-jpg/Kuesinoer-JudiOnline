@@ -497,7 +497,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // Export functions for use in other scripts
 window.KuesionerApp = {
     fetchChartData,
-    getSampleData,
     processChartData,
     showToast,
     showLoading,
